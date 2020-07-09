@@ -9,6 +9,7 @@ import com.example.android.architecture.blueprints.todoapp.Event
 import com.example.android.architecture.blueprints.todoapp.getOrAwaitValue
 import org.hamcrest.Matchers.*
 import org.junit.Assert.*
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -26,14 +27,18 @@ class TasksViewModelTest {
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
 
-    @Test
-    fun addNewTask_setsNewTaskEvent() {
+    // Subject under test
+    private lateinit var tasksViewModel: TasksViewModel
+
+    @Before
+    fun setupViewModel() {
 
         // Given a fresh TasksViewModel
-        val tasksViewModel = TasksViewModel(ApplicationProvider.getApplicationContext())
+        tasksViewModel = TasksViewModel(ApplicationProvider.getApplicationContext())
+    }
 
-        // create an observer
-        val observer = Observer<Event<Unit>> {}
+    @Test
+    fun addNewTask_setsNewTaskEvent() {
 
         // When adding a new task
         tasksViewModel.addNewTask()
@@ -46,12 +51,6 @@ class TasksViewModelTest {
 
     @Test
     fun setFilterAllTasks_tasksAddViewVisible() {
-
-        // Given a fresh ViewModel
-        val tasksViewModel = TasksViewModel(ApplicationProvider.getApplicationContext())
-
-        // create an observer
-        val observer = Observer<Event<Unit>> {}
 
         // When the filter type is ALL_TASKS
         tasksViewModel.setFiltering(TasksFilterType.ALL_TASKS)
