@@ -12,6 +12,8 @@ class StatisticsUtilsTest {
     @Test
     fun getActiveAndCompletedStats_noCompleted_returnsHundredZero() {
 
+        // test should follow: Given, When, Then mnemonic ... a synonym is AAA = arrange, act, assert
+
         // create an active task
         val tasks = listOf<Task>(Task("title", "desc", isCompleted = false))
 

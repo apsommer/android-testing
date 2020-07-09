@@ -4,6 +4,12 @@ apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
+
+    // Always show the result of every unit test when running via command line, even if it passes.
+    testOptions.unitTests {
+        includeAndroidResources = true
+    }
+
     compileSdkVersion rootProject.compileSdkVersion
 
     defaultConfig {
@@ -23,7 +29,7 @@ android {
 
     dataBinding {
         enabled = true
-        enabledForTests = true
+        enabledForTests = true // todo !!!
     }
 }
 
@@ -65,4 +71,13 @@ dependencies {
 
     // Hamcrest
     testImplementation "org.hamcrest:hamcrest-all:$hamcrestVersion"
+
+    // AndroidX Test - JVM testing
+    testImplementation "androidx.test.ext:junit-ktx:$androidXTestExtKotlinRunnerVersion"
+    testImplementation "androidx.test:core-ktx:$androidXTestCoreVersion"
+    testImplementation "org.robolectric:robolectric:$robolectricVersion"
+
+    // for testing LiveData
+    testImplementation "androidx.arch.core:core-testing:$archTestingVersion"
+
 }
